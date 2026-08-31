@@ -82,3 +82,27 @@ select * FROM new_passengers;
 
 UPDATE new_passengers SET Age = 17 WHERE P_Name = 'Shiva';
 select * FROM new_passengers;
+
+
+SELECT Source, COUNT(*) AS Number_of_Buses 
+FROM List_buses 
+GROUP BY Source;
+
+SELECT Source, COUNT(*) AS Number_of_Buses FROM List_buses GROUP BY Source ORDER BY Number_of_Buses ASC;
+
+SELECT * FROM List_buses ORDER BY Fare ASC LIMIT 4;
+
+SELECT * FROM passengers WHERE P_Name LIKE 'D%';
+
+SELECT * FROM passengers WHERE P_Name LIKE '%m' ORDER BY P_Name ASC LIMIT 1;
+
+SELECT AVG(Age) AS Average_Age FROM passengers WHERE Gender IN ('M', 'male');
+
+SELECT P_Name FROM passengers WHERE Status = 'Confirm' ORDER BY Age DESC LIMIT 1;
+
+SELECT p.* FROM passengers p JOIN List_buses b ON p.Bus_no = b.Bus_no WHERE p.Gender = 'F' AND p.Status = 'Confirm' AND b.Source = 'Pari Chauk';
+
+SELECT CONCAT(Age, ' - ', Gender) AS passenger_detail FROM passengers;
+
+UPDATE List_buses SET Fare = CASE WHEN Source = 'Pari Chauk' THEN Fare + 50 WHEN Source = 'ISBT' THEN Fare + 75 ELSE Fare END;
+select * from List_buses
